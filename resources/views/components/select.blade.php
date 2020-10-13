@@ -4,9 +4,7 @@
         @endif
 
         <select name="{{ $name }}" {{ $attributes->merge(['class' => 'custom-select' . ($errors->has($name) ? ' is-invalid' : '')]) }}>
-            @if($placeholder)
-                <option value="">{{ $placeholder }}</option>
-            @endif
+            <option value="">{{ $placeholder ?? null }}</option>
 
             @foreach($options as $optionValue => $optionLabel)
                 <option value="{{ $optionValue }}">{{ $optionLabel }}</option>
