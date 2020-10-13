@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class DummyComponent extends SwiftComponent
+{
+    public $routeUri = '/dummy-route';
+    public $routeName = 'dummy-route';
+    public $pageTitle = 'DummyTitle';
+
+    public function view()
+    {
+        return S::div(
+            S::paragraph("Dummy quote.")
+        );
+    }
+}

@@ -1,0 +1,3 @@
+<td {{ $attributes }}>
+    {!! $content !!}
+</td>

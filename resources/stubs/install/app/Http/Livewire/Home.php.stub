@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class Home extends SwiftComponent
+{
+    public $routeUri = '/home';
+    public $routeName = 'home';
+    public $routeMiddleware = 'auth';
+    public $pageTitle = 'Dashboard';
+
+    public function view()
+    {
+        return S::div(
+            S::livewire('layouts.navbar'),
+
+            S::container(S::row(S::col(
+                S::card()->header($this->pageTitle)->body('You are logged in!')
+            )->md(5))->justifyContentCenter())->py(4)
+        );
+    }
+}

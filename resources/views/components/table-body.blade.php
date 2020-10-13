@@ -1,0 +1,3 @@
+<tbody {{ $attributes }}>
+    {!! $content !!}
+</tbody>

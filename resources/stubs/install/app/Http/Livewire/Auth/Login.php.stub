@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Livewire\Auth;
+
+use App\Providers\RouteServiceProvider;
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+use Redbastie\Swift\Livewire\ThrottlesAttempts;
+
+class Login extends SwiftComponent
+{
+    use ThrottlesAttempts;
+
+    public $routeUri = '/login';
+    public $routeName = 'login';
+    public $routeMiddleware = 'guest';
+    public $pageTitle = 'Login';
+
+    public function view()
+    {
+        return S::div(
+            S::livewire('layouts.navbar'),
+
+            S::container(S::row(S::col(
+                S::card()->header($this->pageTitle)->body(
+                    S::form(
+                        S::input('email')->type('email')->label('Email')->modelDefer(),
+                        S::input('password')->type('password')->label('Password')->modelDefer(),
+                        S::formGroup(S::checkbox('remember')->label('Remember')->modelDefer()),
+                        S::button('Login')->submit()->primary()->block()
+                    )->submitPrevent('login')
+                )
+            )->md(5))->justifyContentCenter())->py(4)
+        );
+    }
+
+    public function login()
+    {
+        $validatedData = $this->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        if ($this->hasTooManyAttempts()) {
+            $this->addError('email', trans('auth.throttle', ['seconds' => $this->availableInSeconds()]));
+            return;
+        }
+
+        if (!auth()->attempt($validatedData, $this->model['remember'] ?? false)) {
+            $this->incrementAttempts();
+            $this->addError('email', trans('auth.failed'));
+            return;
+        }
+
+        $this->clearAttempts();
+        $this->redirect(RouteServiceProvider::HOME);
+    }
+}

@@ -1,0 +1,1 @@
+<pre {{ $attributes }}>{!! $content !!}</pre>

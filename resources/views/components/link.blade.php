@@ -1,0 +1,3 @@
+<a {{ $attributes }}>
+    {!! $content !!}
+</a>

@@ -1,0 +1,3 @@
+<tr {{ $attributes }}>
+    {!! $content !!}
+</tr>

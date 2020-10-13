@@ -1,0 +1,3 @@
+<form {{ $attributes }}>
+    {!! $content !!}
+</form>

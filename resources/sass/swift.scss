@@ -1,0 +1,21 @@
+$body-bg: #f8f9fa !default;
+$card-cap-bg: #ffffff !default;
+$input-placeholder-color: #adb5bd !default;
+$font-size-base: 0.9rem !default;
+$border-radius: 0.5rem !default;
+$border-radius-sm: $border-radius !default;
+$border-radius-lg: $border-radius !default;
+$custom-checkbox-indicator-border-radius: 0.25rem !default;
+$enable-validation-icons: false !default;
+
+@import '~bootstrap/scss/bootstrap';
+@import '~bs4-toast/dist/toast.min.css';
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.toast {
+    overflow: hidden;
+    border-radius: $border-radius;
+}

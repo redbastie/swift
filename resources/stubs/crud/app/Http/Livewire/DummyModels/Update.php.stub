@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Livewire\DummyModels;
+
+use App\Models\DummyModel;
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class Update extends SwiftComponent
+{
+    public $dummyVariable;
+    protected $listeners = ['showUpdateModal'];
+
+    public function view()
+    {
+        return S::form(
+            S::modal('update-modal')->fade()->heading('Update DummyTitle')
+                ->body(
+                    S::input('name')->label('Name')->modelDefer(),
+                )
+                ->footer(
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-modal'),
+                    S::button('Save')->submit()->primary()
+                )
+        )->submitPrevent('save');
+    }
+
+    public function showUpdateModal(DummyModel $dummyVariable)
+    {
+        $this->dummyVariable = $dummyVariable;
+        $this->model = $dummyVariable->toArray();
+        $this->emit('showModal', 'update-modal');
+    }
+
+    public function save()
+    {
+        $validatedData = $this->validate([
+            'name' => ['required'],
+        ]);
+
+        $this->dummyVariable->update($validatedData);
+
+        $this->emit('hideModal', 'update-modal');
+        $this->emit('toastSuccess', 'DummyTitle updated!');
+        $this->emitUp('$refresh');
+    }
+}

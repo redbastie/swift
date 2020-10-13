@@ -1,0 +1,30 @@
+{
+    "name": "redbastie/swift",
+    "description": "A SwiftUI-inspired spin on Laravel Livewire.",
+    "homepage": "https://github.com/redbastie/swift",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Dion",
+            "email": "redbastie@icloud.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^2.10",
+        "laravel/framework": "^8.0",
+        "livewire/livewire": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Redbastie\\Swift\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Redbastie\\Swift\\Providers\\SwiftServiceProvider"
+            ]
+        }
+    }
+}

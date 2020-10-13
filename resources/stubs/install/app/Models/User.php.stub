@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Faker\Generator;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Redbastie\Swift\Traits\SwiftModel;
+
+class User extends Authenticatable
+{
+    use SwiftModel, Notifiable;
+
+    protected $hidden = ['password', 'remember_token'];
+    protected $casts = ['email_verified_at' => 'datetime'];
+
+    public function migration(Blueprint $table)
+    {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->rememberToken();
+        $table->timestamps();
+    }
+
+    public function definition(Generator $faker)
+    {
+        return [
+            'name' => $faker->name,
+            'email' => $faker->unique()->safeEmail,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ];
+    }
+}

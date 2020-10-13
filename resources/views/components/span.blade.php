@@ -1,0 +1,3 @@
+<span {{ $attributes }}>
+    {!! $content !!}
+</span>

@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Livewire\Users;
+
+use App\Models\User;
+use Illuminate\Validation\Rule;
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class Update extends SwiftComponent
+{
+    public $user;
+    protected $listeners = ['showUpdateModal'];
+
+    public function view()
+    {
+        return S::form(
+            S::modal('update-modal')->fade()->heading('Update User')
+                ->body(
+                    S::input('name')->label('Name')->modelDefer(),
+                    S::input('email')->type('email')->label('Email')->modelDefer(),
+                    S::input('password')->type('password')->label('Password')->modelDefer(),
+                    S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
+                )
+                ->footer(
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-modal'),
+                    S::button('Save')->submit()->primary()
+                )
+        )->submitPrevent('save');
+    }
+
+    public function showUpdateModal(User $user)
+    {
+        $this->user = $user;
+        $this->model = $user->toArray();
+        $this->emit('showModal', 'update-modal');
+    }
+
+    public function save()
+    {
+        $validatedData = $this->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', Rule::unique('users')->ignoreModel($this->user)],
+            'password' => ['nullable', 'confirmed'],
+        ]);
+
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        }
+
+        $this->user->update($validatedData);
+
+        $this->emit('hideModal', 'update-modal');
+        $this->emit('toastSuccess', 'User updated!');
+        $this->emitUp('$refresh');
+    }
+}

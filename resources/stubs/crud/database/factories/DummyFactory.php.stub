@@ -1,0 +1,16 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\DummyModel;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class DummyFactory extends Factory
+{
+    protected $model = DummyModel::class;
+
+    public function definition()
+    {
+        return app($this->model)->definition($this->faker);
+    }
+}

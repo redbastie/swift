@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Livewire\Auth;
+
+use Illuminate\Validation\Rule;
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class Profile extends SwiftComponent
+{
+    public function mount()
+    {
+        $this->model = auth()->user()->toArray();
+    }
+
+    public function view()
+    {
+        return S::form(
+            S::modal('profile-modal')->fade()->heading('Profile')
+                ->body(
+                    S::input('name')->label('Name')->modelDefer(),
+                    S::input('email')->type('email')->label('Email')->modelDefer(),
+                    S::input('password')->type('password')->label('Password')->modelDefer(),
+                    S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
+                )
+                ->footer(
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'profile-modal'),
+                    S::button('Save')->submit()->primary()
+                )
+        )->submitPrevent('save');
+    }
+
+    public function save()
+    {
+        $validatedData = $this->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user())],
+            'password' => ['nullable', 'confirmed'],
+        ]);
+
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        }
+
+        auth()->user()->update($validatedData);
+
+        $this->emit('hideModal', 'profile-modal');
+        $this->emit('toastSuccess', 'Profile saved!');
+        $this->emitUp('$refresh');
+    }
+}

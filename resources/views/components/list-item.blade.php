@@ -1,0 +1,3 @@
+<li {{ $attributes }}>
+    {!! $content !!}
+</li>
