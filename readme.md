@@ -22,6 +22,8 @@ Links:
 - Contribute: [GitHub Pulls](https://github.com/redbastie/swift/pulls)
 - Donate: [PayPal](https://www.paypal.com/paypalme2/kjjdion)
 
+<a href="https://www.youtube.com/watch?v=tyxeGM5ak1g"><img src="https://i.imgur.com/2ZL7rBB.png" alt=""></a>
+
 
 
 ## Installation
