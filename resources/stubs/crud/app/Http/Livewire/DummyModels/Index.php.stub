@@ -36,7 +36,7 @@ class Index extends SwiftComponent
                 S::heading($this->pageTitle),
 
                 S::row(
-                    S::col(S::input('search')->type('search')->placeholder('Search')->modelDebounce(500))->mdAuto()->mb(3),
+                    S::col(S::input('search')->type('search')->placeholder('Search')->modelDebounce())->mdAuto()->mb(3),
                     S::col(S::button('Create DummyTitle')->primary()->click('$emit', 'showCreateModal'))->mdAuto()->mb(3)
                 )->justifyContentBetween(),
 
