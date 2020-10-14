@@ -21,37 +21,32 @@ class MigrateAutoCommand extends Command
             $className = 'App\\Models\\' . str_replace(['/', '.php'], ['\\', ''], $file->getRelativePathname());
             $class = app($className);
 
-            // Skip this model if it has no migration definition
-            if (! method_exists($class, 'migration')) {
-                continue;
+            if (method_exists($class, 'migration')) {
+                if (Schema::hasTable($class->getTable())) {
+                    $tempTable = 'temp_' . $class->getTable();
+
+                    Schema::dropIfExists($tempTable);
+                    Schema::create($tempTable, function (Blueprint $table) use ($class) {
+                        $class->migration($table);
+                    });
+
+                    $schemaManager = $class->getConnection()->getDoctrineSchemaManager();
+                    $classTableDetails = $schemaManager->listTableDetails($class->getTable());
+                    $tempTableDetails = $schemaManager->listTableDetails($tempTable);
+                    $tableDiff = (new Comparator)->diffTable($classTableDetails, $tempTableDetails);
+
+                    if ($tableDiff) {
+                        $schemaManager->alterTable($tableDiff);
+                    }
+
+                    Schema::drop($tempTable);
+                }
+                else {
+                    Schema::create($class->getTable(), function (Blueprint $table) use ($class) {
+                        $class->migration($table);
+                    });
+                }
             }
-            
-            // Create the whole table if it doesn't already exist
-            if (! Schema::hasTable($class->getTable())) {
-                Schema::create($class->getTable(), function (Blueprint $table) use ($class) {
-                    $class->migration($table);
-                });
-                
-                return;
-            }
-            
-            $tempTable = 'temp_' . $class->getTable();
-
-            Schema::dropIfExists($tempTable);
-            Schema::create($tempTable, function (Blueprint $table) use ($class) {
-                $class->migration($table);
-            });
-
-            $schemaManager = $class->getConnection()->getDoctrineSchemaManager();
-            $classTableDetails = $schemaManager->listTableDetails($class->getTable());
-            $tempTableDetails = $schemaManager->listTableDetails($tempTable);
-            $tableDiff = (new Comparator)->diffTable($classTableDetails, $tempTableDetails);
-
-            if ($tableDiff) {
-                $schemaManager->alterTable($tableDiff);
-            }
-
-            Schema::drop($tempTable);
         }
 
         $this->info('Migration complete!');
