@@ -34,8 +34,8 @@ trait LoadingUtilities
         return $this->attr('wire:loading.attr.remove', $attr);
     }
 
-    public function target($target)
+    public function loadingTarget($loadingTarget)
     {
-        return $this->attr('wire:target', $target);
+        return $this->attr('wire:target', $loadingTarget);
     }
 }

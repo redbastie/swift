@@ -72,6 +72,12 @@ Generate CRUD scaffolding for a new model:
     
 This will create the model, factory, nav item, and CRUD components.
 
+Generate a new Swift model:
+
+    php artisan make:swiftmodel ModelName
+    
+This will create the model and factory.
+
 
 
 ## Using Components
@@ -250,7 +256,7 @@ Methods: `inline`, `submit`, `submitPrevent`, `submitSelf`, `submitStop`
         S::input('first_name')->modelDefer(),
     ),
 
-Methods: none
+Methods: `label`
 
 ### Form Row
 
@@ -332,7 +338,7 @@ Methods: none
 
     S::link('Go To Reddit')->href('https://reddit.com'),
 
-Methods: `href`, `active`, `disabled`, `stretched`
+Methods: `href`, `target`, `active`, `disabled`, `stretched`
 
 ### List
 

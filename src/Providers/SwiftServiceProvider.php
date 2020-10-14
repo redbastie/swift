@@ -7,6 +7,7 @@ use Redbastie\Swift\Commands\InstallSwiftCommand;
 use Redbastie\Swift\Commands\MakeCrudCommand;
 use Redbastie\Swift\Commands\MakePageCommand;
 use Redbastie\Swift\Commands\MakeSwiftCommand;
+use Redbastie\Swift\Commands\MakeSwiftModelCommand;
 use Redbastie\Swift\Commands\MigrateAutoCommand;
 
 class SwiftServiceProvider extends ServiceProvider
@@ -19,6 +20,7 @@ class SwiftServiceProvider extends ServiceProvider
                 MakeCrudCommand::class,
                 MakePageCommand::class,
                 MakeSwiftCommand::class,
+                MakeSwiftModelCommand::class,
                 MigrateAutoCommand::class,
             ]);
         }

@@ -19,6 +19,11 @@ class LinkComponent extends BaseComponent
         return $this->attr('href', $href);
     }
 
+    public function target($target)
+    {
+        return $this->attr('target', $target);
+    }
+
     public function active($active = true)
     {
         return $active ? $this->class('active') : $this;
