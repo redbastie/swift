@@ -24,7 +24,7 @@ class SwiftComponent extends Component
 
     public function validate($rules = null, $messages = [], $attributes = [])
     {
-        [$rules, $messages] = $this->providedOrGlobalRulesAndMessages($rules, $messages);
+        [$rules, $messages, $attributes] = $this->providedOrGlobalRulesMessagesAndAttributes($rules, $messages, $attributes);
         $validator = Validator::make($this->model, $rules, $messages, $attributes);
 
         if (config('swift.toast_validation_error') && $validator->fails()) {
