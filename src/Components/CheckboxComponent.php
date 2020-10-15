@@ -10,6 +10,7 @@ class CheckboxComponent extends BaseComponent
 
     protected $name;
     protected $label;
+    protected $checkboxLabel;
     protected $help;
     protected $type = 'checkbox';
     protected $inline;
@@ -24,6 +25,13 @@ class CheckboxComponent extends BaseComponent
     public function label(...$content)
     {
         $this->label = implode(PHP_EOL, func_get_args());
+
+        return $this;
+    }
+
+    public function checkboxLabel(...$content)
+    {
+        $this->checkboxLabel = implode(PHP_EOL, func_get_args());
 
         return $this;
     }

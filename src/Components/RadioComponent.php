@@ -11,6 +11,7 @@ class RadioComponent extends BaseComponent
 
     protected $name;
     protected $options = [];
+    protected $label;
     protected $help;
     protected $inline;
 
@@ -24,6 +25,13 @@ class RadioComponent extends BaseComponent
     public function options($options)
     {
         $this->options = Arr::isAssoc($options) ? $options : array_combine($options, $options);
+
+        return $this;
+    }
+
+    public function label(...$content)
+    {
+        $this->label = implode(PHP_EOL, func_get_args());
 
         return $this;
     }

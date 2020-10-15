@@ -182,7 +182,7 @@ Methods: `header`, `image`, `body`, `footer`
 
     S::checkbox('agree')->label('Agree to TOS')->modelDefer(),
 
-Methods: `label`, `help`, `switch`, `inline`, `disabled`, `model`, `modelDebounce`, `modelDefer`, `modelLazy`
+Methods: `label`, `checkboxLabel`, `help`, `switch`, `inline`, `disabled`, `model`, `modelDebounce`, `modelDefer`, `modelLazy`
 
 ### Code
 
@@ -497,7 +497,7 @@ Methods: `label`, `striped`, `animated`
 
     S::radio('gender')->options(['Male', 'Female'])->modelDefer(),
 
-Methods: `options`, `help`, `inline`, `disabled`, `model`, `modelDebounce`, `modelDefer`, `modelLazy`
+Methods: `options`, `label`, `help`, `inline`, `disabled`, `model`, `modelDebounce`, `modelDefer`, `modelLazy`
 
 ### Row (Grid)
 

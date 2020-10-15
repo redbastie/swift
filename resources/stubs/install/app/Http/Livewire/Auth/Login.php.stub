@@ -26,7 +26,7 @@ class Login extends SwiftComponent
                     S::form(
                         S::input('email')->type('email')->label('Email')->modelDefer(),
                         S::input('password')->type('password')->label('Password')->modelDefer(),
-                        S::formGroup(S::checkbox('remember')->label('Remember')->modelDefer()),
+                        S::formGroup(S::checkbox('remember')->modelDefer()),
                         S::button('Login')->submit()->primary()->block()
                     )->submitPrevent('login')
                 )
