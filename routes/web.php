@@ -12,7 +12,7 @@ Route::middleware('web')->group(function () {
             $className = 'App\\Http\\Livewire\\' . str_replace(['/', '.php'], ['\\', ''], $file->getRelativePathname());
             $class = app($className);
 
-            if ($class->routeUri) {
+            if (property_exists($class, 'routeUri') && $class->routeUri) {
                 $route = Route::get($class->routeUri, $className);
                 if ($class->routeName) $route->name($class->routeName);
                 if ($class->routeMiddleware) $route->middleware($class->routeMiddleware);
