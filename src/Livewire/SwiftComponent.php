@@ -41,4 +41,14 @@ class SwiftComponent extends Component
     {
         $this->resetPage();
     }
+
+    public function addModelArrayItem($name)
+    {
+        $this->model[$name][] = [];
+    }
+
+    public function removeModelArrayItem($name, $key)
+    {
+        unset($this->model[$name][$key]);
+    }
 }
