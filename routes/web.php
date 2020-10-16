@@ -12,11 +12,14 @@ Route::middleware('web')->group(function () {
             $name = 'App\\Http\\Livewire\\' . str_replace(['/', '.php'], ['\\', ''], $file->getRelativePathname());
             $reflection = new ReflectionClass($name);
 
-            if ($reflection->hasProperty('routeUri') && $reflection->getProperty('routeUri')) {
+            if ($reflection->hasProperty('routeUri')) {
                 $class = app($name);
-                $route = Route::get($class->routeUri, $name);
-                if ($class->routeName) $route->name($class->routeName);
-                if ($class->routeMiddleware) $route->middleware($class->routeMiddleware);
+
+                if ($class->routeUri) {
+                    $route = Route::get($class->routeUri, $name);
+                    if ($class->routeName) $route->name($class->routeName);
+                    if ($class->routeMiddleware) $route->middleware($class->routeMiddleware);
+                }
             }
         }
     }
