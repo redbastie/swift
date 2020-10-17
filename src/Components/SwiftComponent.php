@@ -126,6 +126,11 @@ class SwiftComponent
         return new IfComponent($condition, $callback);
     }
 
+    public static function iframe($src)
+    {
+        return new IframeComponent($src);
+    }
+
     public static function image($src)
     {
         return new ImageComponent($src);
