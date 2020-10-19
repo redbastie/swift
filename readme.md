@@ -147,7 +147,7 @@ Methods: `active`
 
     S::button('Do Something')->primary()->click('doSomething'),
 
-Methods: `submit`, `primary`, `secondary`, `success`, `info`, `danger`, `warning`, `light`, `dark`, `outlinePrimary`, `outlineSecondary`, `outlineSuccess`, `outlineInfo`, `outlineDanger`, `outlineWarning`, `outlineLight`, `outlineDark`, `link`, `sm`, `lg`, `block`, `disabled`
+Methods: `submit`, `primary`, `secondary`, `success`, `info`, `danger`, `warning`, `light`, `dark`, `outlinePrimary`, `outlineSecondary`, `outlineSuccess`, `outlineInfo`, `outlineDanger`, `outlineWarning`, `outlineLight`, `outlineDark`, `link`, `active`, `sm`, `lg`, `block`, `disabled`
 
 ### Button Group
 
@@ -298,6 +298,12 @@ Methods: `solid`, `regular`, `light`, `duotone`, `brand`, `fw`, `xs`,  `sm`,  `l
     }),
 
 Methods: `elseif`, `else`
+
+### Iframe
+
+    S::iframe('http://maps.google.com/maps?q=pizza+pizza+oshawa&z=10&output=embed')->width('100%')->height(300),
+
+Methods: `width`, `height`
 
 ### Image
 

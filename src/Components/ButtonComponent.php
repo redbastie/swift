@@ -103,6 +103,11 @@ class ButtonComponent extends BaseComponent
         return $this->class('btn btn-link');
     }
 
+    public function active($active = true)
+    {
+        return $active ? $this->class('active') : $this;
+    }
+
     public function sm()
     {
         return $this->class('btn-sm');
