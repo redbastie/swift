@@ -42,6 +42,6 @@ class Update extends SwiftComponent
 
         $this->emit('hideModal', 'update-modal');
         $this->emit('toastSuccess', 'DummyTitle updated!');
-        $this->emitUp('$refresh');
+        $this->emit('$refresh');
     }
 }

@@ -47,6 +47,6 @@ class Create extends SwiftComponent
 
         $this->emit('hideModal', 'create-modal');
         $this->emit('toastSuccess', 'User created!');
-        $this->emitUp('$refresh');
+        $this->emit('$refresh');
     }
 }

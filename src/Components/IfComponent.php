@@ -2,6 +2,8 @@
 
 namespace Redbastie\Swift\Components;
 
+use Closure;
+
 class IfComponent
 {
     public $conditions = [];
@@ -31,7 +33,7 @@ class IfComponent
             if ($condition[0]) {
                 $callback = $condition[1];
 
-                return (string)$callback();
+                return (string)($callback instanceof Closure ? $callback() : $callback);
             }
         }
 

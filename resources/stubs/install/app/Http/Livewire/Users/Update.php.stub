@@ -52,6 +52,6 @@ class Update extends SwiftComponent
 
         $this->emit('hideModal', 'update-modal');
         $this->emit('toastSuccess', 'User updated!');
-        $this->emitUp('$refresh');
+        $this->emit('$refresh');
     }
 }

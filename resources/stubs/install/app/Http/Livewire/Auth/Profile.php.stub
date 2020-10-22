@@ -46,6 +46,6 @@ class Profile extends SwiftComponent
 
         $this->emit('hideModal', 'profile-modal');
         $this->emit('toastSuccess', 'Profile saved!');
-        $this->emitUp('$refresh');
+        $this->emit('$refresh');
     }
 }
