@@ -2,6 +2,7 @@
 
 namespace Redbastie\Swift\Livewire;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -9,7 +10,7 @@ use Livewire\WithPagination;
 
 class SwiftComponent extends Component
 {
-    use WithFileUploads, WithPagination;
+    use AuthorizesRequests, WithFileUploads, WithPagination;
 
     public $routeUri;
     public $routeName;
