@@ -8,7 +8,8 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 
 class Update extends SwiftComponent
 {
-    public $dummyVariable;
+    use Crud;
+
     protected $listeners = ['showUpdateModal'];
 
     public function view()
@@ -16,9 +17,7 @@ class Update extends SwiftComponent
         return S::form(
             S::modal('update-modal')->fade()
                 ->heading('Update DummyTitle')
-                ->body(
-                    S::input('name')->label('Name')->modelDefer(),
-                )
+                ->body($this->formFields())
                 ->footer(
                     S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-modal'),
                     S::button('Save')->submit()->primary()
@@ -35,9 +34,7 @@ class Update extends SwiftComponent
 
     public function save()
     {
-        $validatedData = $this->validate([
-            'name' => ['required'],
-        ]);
+        $validatedData = $this->validate();
 
         $this->dummyVariable->update($validatedData);
 

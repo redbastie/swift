@@ -52,7 +52,7 @@ class MigrateAutoCommand extends Command
         $this->info('Migration complete!');
 
         if ($this->option('seed')) {
-            Artisan::call('db:seed');
+            Artisan::call('db:seed --force');
 
             $this->info('Seeding complete!');
         }

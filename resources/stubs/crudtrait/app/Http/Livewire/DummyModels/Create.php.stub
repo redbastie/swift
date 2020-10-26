@@ -8,6 +8,8 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 
 class Create extends SwiftComponent
 {
+    use Crud;
+
     protected $listeners = ['showCreateModal'];
 
     public function view()
@@ -15,9 +17,7 @@ class Create extends SwiftComponent
         return S::form(
             S::modal('create-modal')->fade()
                 ->heading('Create DummyTitle')
-                ->body(
-                    S::input('name')->label('Name')->modelDefer(),
-                )
+                ->body($this->formFields())
                 ->footer(
                     S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'create-modal'),
                     S::button('Save')->submit()->primary()
@@ -33,9 +33,7 @@ class Create extends SwiftComponent
 
     public function save()
     {
-        $validatedData = $this->validate([
-            'name' => ['required'],
-        ]);
+        $validatedData = $this->validate();
 
         DummyModel::query()->create($validatedData);
 

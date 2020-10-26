@@ -72,6 +72,12 @@ Generate CRUD scaffolding for a new model:
     
 This will create the model, factory, nav item, and CRUD components.
 
+Generate CRUD for a new model with a shared trait for form fields & rules:
+
+    php artisan make:crudtrait ModelName
+    
+This will create the model, factory, nav item, CRUD components and trait.
+
 Generate a new Swift model:
 
     php artisan make:swiftmodel ModelName

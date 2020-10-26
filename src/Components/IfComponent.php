@@ -33,7 +33,7 @@ class IfComponent
             if ($condition[0]) {
                 $callback = $condition[1];
 
-                return (string)($callback instanceof Closure ? $callback() : $callback);
+                return (string)$callback();
             }
         }
 

@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Livewire\DummyModels;
+
+use Redbastie\Swift\Components\SwiftComponent as S;
+
+trait Crud
+{
+    public $dummyVariable;
+
+    protected function formFields()
+    {
+        return S::div(
+            S::input('name')->label('Name')->modelDefer(),
+        );
+    }
+
+    protected function rules()
+    {
+        return [
+            'name' => ['required'],
+        ];
+    }
+}

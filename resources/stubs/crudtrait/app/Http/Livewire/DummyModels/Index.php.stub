@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Livewire\DummyModels;
+
+use App\Models\DummyModel;
+use Redbastie\Swift\Components\SwiftComponent as S;
+use Redbastie\Swift\Livewire\SwiftComponent;
+
+class Index extends SwiftComponent
+{
+    public $routeUri = '/dummy-routes';
+    public $routeName = 'dummy-routes';
+    public $routeMiddleware = 'auth';
+    public $pageTitle = 'DummyTitles';
+    protected $listeners = ['$refresh'];
+
+    public function query()
+    {
+        $query = DummyModel::query();
+
+        if (!empty($this->model['search'])) {
+            $query->where('name', 'like', '%' . $this->model['search'] . '%');
+        }
+
+        return $query->orderBy('name');
+    }
+
+    public function view()
+    {
+        $dummyVariables = $this->query()->paginate();
+
+        return S::div(
+            S::livewire('layouts.navbar'),
+
+            S::container(
+                S::heading($this->pageTitle),
+
+                S::row(
+                    S::col(S::input('search')->type('search')->placeholder('Search')->modelDebounce())->mdAuto()->mb(3),
+                    S::col(S::button('Create DummyTitle')->primary()->click('$emit', 'showCreateModal'))->mdAuto()->mb(3)
+                )->justifyContentBetween(),
+
+                S::listGroup(
+                    S::each($dummyVariables, function ($dummyVariable) {
+                        return S::listGroupItem(
+                            S::row(
+                                S::col(e($dummyVariable->name))->md(),
+                                S::col(
+                                    S::button(S::icon('eye'))->title('Read')->link()->p(1)->click('$emit', 'showReadModal', $dummyVariable->id),
+                                    S::button(S::icon('edit'))->title('Update')->link()->p(1)->click('$emit', 'showUpdateModal', $dummyVariable->id),
+                                    S::button(S::icon('trash-alt'))->title('Delete')->link()->p(1)->click('delete', $dummyVariable->id)->confirm(),
+                                )->mdAuto()
+                            )->alignItemsCenter()
+                        )->action();
+                    })->empty(
+                        S::listGroupItem('No DummyTitles to display.')
+                    )
+                )->mb(3),
+
+                S::pagination($dummyVariables)
+            )->py(4),
+
+            S::livewire('dummy-routes.create'),
+            S::livewire('dummy-routes.read'),
+            S::livewire('dummy-routes.update')
+        );
+    }
+
+    public function delete(DummyModel $dummyVariable)
+    {
+        $dummyVariable->delete();
+        $this->emit('toastSuccess', 'DummyTitle deleted!');
+    }
+}
