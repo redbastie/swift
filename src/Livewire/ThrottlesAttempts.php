@@ -37,11 +37,6 @@ trait ThrottlesAttempts
         return $this->throttlePrefix() . '|' . request()->ip();
     }
 
-    public function throttleModel()
-    {
-        return property_exists($this, 'throttleModel') ? $this->throttleModel : 'email';
-    }
-
     public function throttleAttempts()
     {
         return property_exists($this, 'throttleAttempts') ? $this->throttleAttempts : 5;
