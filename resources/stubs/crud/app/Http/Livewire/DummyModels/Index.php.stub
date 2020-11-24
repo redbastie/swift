@@ -37,7 +37,7 @@ class Index extends SwiftComponent
 
                 S::row(
                     S::col(S::input('search')->type('search')->placeholder('Search')->modelDebounce())->mdAuto()->mb(3),
-                    S::col(S::button('Create DummyTitle')->primary()->click('$emit', 'showCreateModal'))->mdAuto()->mb(3)
+                    S::col(S::button('Create DummyTitle')->primary()->click('$emit', 'showCreateDummyModelModal'))->mdAuto()->mb(3)
                 )->justifyContentBetween(),
 
                 S::listGroup(
@@ -46,8 +46,8 @@ class Index extends SwiftComponent
                             S::row(
                                 S::col(e($dummyVariable->name))->md(),
                                 S::col(
-                                    S::button(S::icon('eye'))->title('Read')->link()->p(1)->click('$emit', 'showReadModal', $dummyVariable->id),
-                                    S::button(S::icon('edit'))->title('Update')->link()->p(1)->click('$emit', 'showUpdateModal', $dummyVariable->id),
+                                    S::button(S::icon('eye'))->title('Read')->link()->p(1)->click('$emit', 'showReadDummyModelModal', $dummyVariable->id),
+                                    S::button(S::icon('edit'))->title('Update')->link()->p(1)->click('$emit', 'showUpdateDummyModelModal', $dummyVariable->id),
                                     S::button(S::icon('trash-alt'))->title('Delete')->link()->p(1)->click('delete', $dummyVariable->id)->confirm(),
                                 )->mdAuto()
                             )->alignItemsCenter()

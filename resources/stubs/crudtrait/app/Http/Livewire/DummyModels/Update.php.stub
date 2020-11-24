@@ -10,26 +10,26 @@ class Update extends SwiftComponent
 {
     use Crud;
 
-    protected $listeners = ['showUpdateModal'];
+    protected $listeners = ['showUpdateDummyModelModal'];
 
     public function view()
     {
         return S::form(
-            S::modal('update-modal')->fade()
+            S::modal('update-dummy-route-modal')->fade()
                 ->heading('Update DummyTitle')
                 ->body($this->formFields())
                 ->footer(
-                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-modal'),
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-dummy-route-modal'),
                     S::button('Save')->submit()->primary()
                 )
         )->submitPrevent('save');
     }
 
-    public function showUpdateModal(DummyModel $dummyVariable)
+    public function showUpdateDummyModelModal(DummyModel $dummyVariable)
     {
         $this->dummyVariable = $dummyVariable;
         $this->model = $dummyVariable->toArray();
-        $this->emit('showModal', 'update-modal');
+        $this->emit('showModal', 'update-dummy-route-modal');
     }
 
     public function save()
@@ -38,7 +38,7 @@ class Update extends SwiftComponent
 
         $this->dummyVariable->update($validatedData);
 
-        $this->emit('hideModal', 'update-modal');
+        $this->emit('hideModal', 'update-dummy-route-modal');
         $this->emit('toastSuccess', 'DummyTitle updated!');
         $this->emit('$refresh');
     }

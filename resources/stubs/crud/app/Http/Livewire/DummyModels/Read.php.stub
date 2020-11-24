@@ -10,11 +10,11 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 class Read extends SwiftComponent
 {
     public $dummyVariable;
-    protected $listeners = ['showReadModal'];
+    protected $listeners = ['showReadDummyModelModal'];
 
     public function view()
     {
-        return S::modal('read-modal')->fade()
+        return S::modal('read-dummy-route-modal')->fade()
             ->heading('DummyTitle')
             ->body(
                 S::each($this->dummyVariable ? $this->dummyVariable->toArray() : [], function ($value, $key) {
@@ -28,13 +28,13 @@ class Read extends SwiftComponent
                 })
             )
             ->footer(
-                S::button('Close')->secondary()->click('$emit', 'hideModal', 'read-modal')
+                S::button('Close')->secondary()->click('$emit', 'hideModal', 'read-dummy-route-modal')
             );
     }
 
-    public function showReadModal(DummyModel $dummyVariable)
+    public function showReadDummyModelModal(DummyModel $dummyVariable)
     {
         $this->dummyVariable = $dummyVariable;
-        $this->emit('showModal', 'read-modal');
+        $this->emit('showModal', 'read-dummy-route-modal');
     }
 }

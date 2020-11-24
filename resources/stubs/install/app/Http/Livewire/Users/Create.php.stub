@@ -8,12 +8,12 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 
 class Create extends SwiftComponent
 {
-    protected $listeners = ['showCreateModal'];
+    protected $listeners = ['showCreateUserModal'];
 
     public function view()
     {
         return S::form(
-            S::modal('create-modal')->fade()
+            S::modal('create-user-modal')->fade()
                 ->heading('Create User')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
@@ -22,16 +22,16 @@ class Create extends SwiftComponent
                     S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
                 )
                 ->footer(
-                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'create-modal'),
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'create-user-modal'),
                     S::button('Save')->submit()->primary()
                 )
         )->submitPrevent('save');
     }
 
-    public function showCreateModal()
+    public function showCreateUserModal()
     {
         $this->reset('model');
-        $this->emit('showModal', 'create-modal');
+        $this->emit('showModal', 'create-user-modal');
     }
 
     public function save()
@@ -46,7 +46,7 @@ class Create extends SwiftComponent
 
         User::query()->create($validatedData);
 
-        $this->emit('hideModal', 'create-modal');
+        $this->emit('hideModal', 'create-user-modal');
         $this->emit('toastSuccess', 'User created!');
         $this->emit('$refresh');
     }

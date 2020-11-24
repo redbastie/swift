@@ -8,27 +8,27 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 
 class Create extends SwiftComponent
 {
-    protected $listeners = ['showCreateModal'];
+    protected $listeners = ['showCreateDummyModelModal'];
 
     public function view()
     {
         return S::form(
-            S::modal('create-modal')->fade()
+            S::modal('create-dummy-route-modal')->fade()
                 ->heading('Create DummyTitle')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
                 )
                 ->footer(
-                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'create-modal'),
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'create-dummy-route-modal'),
                     S::button('Save')->submit()->primary()
                 )
         )->submitPrevent('save');
     }
 
-    public function showCreateModal()
+    public function showCreateDummyModelModal()
     {
         $this->reset('model');
-        $this->emit('showModal', 'create-modal');
+        $this->emit('showModal', 'create-dummy-route-modal');
     }
 
     public function save()
@@ -39,7 +39,7 @@ class Create extends SwiftComponent
 
         DummyModel::query()->create($validatedData);
 
-        $this->emit('hideModal', 'create-modal');
+        $this->emit('hideModal', 'create-dummy-route-modal');
         $this->emit('toastSuccess', 'DummyTitle created!');
         $this->emit('$refresh');
     }

@@ -10,12 +10,12 @@ use Redbastie\Swift\Livewire\SwiftComponent;
 class Update extends SwiftComponent
 {
     public $user;
-    protected $listeners = ['showUpdateModal'];
+    protected $listeners = ['showUpdateUserModal'];
 
     public function view()
     {
         return S::form(
-            S::modal('update-modal')->fade()
+            S::modal('update-user-modal')->fade()
                 ->heading('Update User')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
@@ -24,17 +24,17 @@ class Update extends SwiftComponent
                     S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
                 )
                 ->footer(
-                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-modal'),
+                    S::button('Cancel')->secondary()->click('$emit', 'hideModal', 'update-user-modal'),
                     S::button('Save')->submit()->primary()
                 )
         )->submitPrevent('save');
     }
 
-    public function showUpdateModal(User $user)
+    public function showUpdateUserModal(User $user)
     {
         $this->user = $user;
         $this->model = $user->toArray();
-        $this->emit('showModal', 'update-modal');
+        $this->emit('showModal', 'update-user-modal');
     }
 
     public function save()
@@ -51,7 +51,7 @@ class Update extends SwiftComponent
 
         $this->user->update($validatedData);
 
-        $this->emit('hideModal', 'update-modal');
+        $this->emit('hideModal', 'update-user-modal');
         $this->emit('toastSuccess', 'User updated!');
         $this->emit('$refresh');
     }
