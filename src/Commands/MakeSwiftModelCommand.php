@@ -16,7 +16,6 @@ class MakeSwiftModelCommand extends Command
         $this->stubDir = __DIR__ . '/../../resources/stubs/swiftmodel';
 
         $this->createFiles();
-
         $this->info($this->argument . ' swift model generated!');
     }
 }

@@ -17,7 +17,6 @@ class MakeSwiftCommand extends Command
         $this->targetDir = 'app/Http/Livewire';
 
         $this->createFiles();
-
         $this->info($this->argument . ' component generated!');
     }
 }

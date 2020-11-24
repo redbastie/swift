@@ -15,7 +15,8 @@ class Update extends SwiftComponent
     public function view()
     {
         return S::form(
-            S::modal('update-modal')->fade()->heading('Update User')
+            S::modal('update-modal')->fade()
+                ->heading('Update User')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
                     S::input('email')->type('email')->label('Email')->modelDefer(),

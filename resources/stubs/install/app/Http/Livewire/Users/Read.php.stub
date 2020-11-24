@@ -14,7 +14,8 @@ class Read extends SwiftComponent
 
     public function view()
     {
-        return S::modal('read-modal')->fade()->heading('User')
+        return S::modal('read-modal')->fade()
+            ->heading('User')
             ->body(
                 S::each($this->user ? $this->user->toArray() : [], function ($value, $key) {
                     return S::div(

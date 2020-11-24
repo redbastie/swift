@@ -27,9 +27,14 @@ trait ThrottlesAttempts
         return $this->rateLimiter()->availableIn($this->throttleKey());
     }
 
+    protected function throttlePrefix()
+    {
+        return $this->model['email'];
+    }
+
     protected function throttleKey()
     {
-        return Str::lower($this->model[$this->throttleModel()]) . '|' . request()->ip();
+        return $this->throttlePrefix() . '|' . request()->ip();
     }
 
     public function throttleModel()

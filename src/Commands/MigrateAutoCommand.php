@@ -53,7 +53,6 @@ class MigrateAutoCommand extends Command
 
         if ($this->option('seed')) {
             Artisan::call('db:seed --force');
-
             $this->info('Seeding complete!');
         }
     }

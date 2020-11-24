@@ -18,7 +18,9 @@ class Home extends SwiftComponent
             S::livewire('layouts.navbar'),
 
             S::container(S::row(S::col(
-                S::card()->header($this->pageTitle)->body('You are logged in!')
+                S::card()
+                    ->header($this->pageTitle)
+                    ->body('You are logged in!')
             )->md(5))->justifyContentCenter())->py(4)
         );
     }

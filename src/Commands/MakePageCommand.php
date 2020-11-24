@@ -17,7 +17,6 @@ class MakePageCommand extends Command
         $this->targetDir = 'app/Http/Livewire';
 
         $this->createFiles();
-
         $this->info($this->argument . ' page component generated!');
     }
 }

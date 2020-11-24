@@ -13,7 +13,8 @@ class Create extends SwiftComponent
     public function view()
     {
         return S::form(
-            S::modal('create-modal')->fade()->heading('Create User')
+            S::modal('create-modal')->fade()
+                ->heading('Create User')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
                     S::input('email')->type('email')->label('Email')->modelDefer(),

@@ -16,7 +16,8 @@ class Profile extends SwiftComponent
     public function view()
     {
         return S::form(
-            S::modal('profile-modal')->fade()->heading('Profile')
+            S::modal('profile-modal')->fade()
+                ->heading('Profile')
                 ->body(
                     S::input('name')->label('Name')->modelDefer(),
                     S::input('email')->type('email')->label('Email')->modelDefer(),

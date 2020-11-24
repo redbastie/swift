@@ -20,15 +20,17 @@ class Register extends SwiftComponent
             S::livewire('layouts.navbar'),
 
             S::container(S::row(S::col(
-                S::card()->header($this->pageTitle)->body(
-                    S::form(
-                        S::input('name')->label('Name')->modelDefer(),
-                        S::input('email')->type('email')->label('Email')->modelDefer(),
-                        S::input('password')->type('password')->label('Password')->modelDefer(),
-                        S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
-                        S::button('Register')->submit()->primary()->block()
-                    )->submitPrevent('register')
-                )
+                S::card()
+                    ->header($this->pageTitle)
+                    ->body(
+                        S::form(
+                            S::input('name')->label('Name')->modelDefer(),
+                            S::input('email')->type('email')->label('Email')->modelDefer(),
+                            S::input('password')->type('password')->label('Password')->modelDefer(),
+                            S::input('password_confirmation')->type('password')->label('Confirm Password')->modelDefer(),
+                            S::button('Register')->submit()->primary()->block()
+                        )->submitPrevent('register')
+                    )
             )->md(5))->justifyContentCenter())->py(4)
         );
     }
@@ -37,16 +39,14 @@ class Register extends SwiftComponent
     {
         $validatedData = $this->validate([
             'name' => ['required'],
-            'email' => ['required', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed'],
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
-
         $user = User::create($validatedData);
 
         auth()->login($user);
-
         $this->redirect(RouteServiceProvider::HOME);
     }
 }

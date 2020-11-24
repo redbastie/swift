@@ -3,6 +3,7 @@
 namespace Redbastie\Swift\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Redbastie\Swift\Commands\InstallPasswordForgot;
 use Redbastie\Swift\Commands\InstallSwiftCommand;
 use Redbastie\Swift\Commands\MakeCrudCommand;
 use Redbastie\Swift\Commands\MakeCrudTraitCommand;
@@ -17,6 +18,7 @@ class SwiftServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                InstallPasswordForgot::class,
                 InstallSwiftCommand::class,
                 MakeCrudCommand::class,
                 MakeCrudTraitCommand::class,
