@@ -1,3 +1,9 @@
+# NO LONGER MAINTAINED
+
+This package is no longer maintained. Please consider my latest package here: https://github.com/redbastie/larawire
+
+-----
+
 # Laravel Swift
 
 Say goodbye to HTML, CSS, and Javascript! Laravel Swift is a SwiftUI-inspired spin on Laravel Livewire. It utilizes Laravel, Livewire, Bootstrap, Font Awesome, & more under the hood.
