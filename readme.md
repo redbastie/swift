@@ -1,6 +1,6 @@
 # NO LONGER MAINTAINED
 
-This package is no longer maintained. Please consider my latest package here: https://github.com/redbastie/skele
+This package is no longer maintained. Please consider my latest package here: https://github.com/redbastie/tailwire
 
 -----
 
