@@ -1,6 +1,8 @@
-# NO LONGER MAINTAINED
+# No Longer Maintained
 
-This package is no longer maintained. Please consider my latest package here: https://github.com/redbastie/tailwire
+Please check out my new package here: https://github.com/bastinald/malzahar
+
+It's a much better implementation of what this package was trying to do.
 
 -----
 
